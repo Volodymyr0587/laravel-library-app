@@ -11,17 +11,15 @@ use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Validation\Validator;
 use Illuminate\View\View;
 
-class LoanController extends Controller
-{
-    public function index(): View
-    {
+class LoanController extends Controller {
+
+    public function index(): View {
         return view('loans.index', ['loans' => Auth::user()->activeLoans()]);
     }
 
-    public function store(Book $book, Request $request): RedirectResponse
-    {
+    public function store(Book $book, Request $request): RedirectResponse {
         $validator = ValidatorFacade::make($request->all(), [
-            'number_borrowed' => 'request|int',
+            'number_borrowed' => 'required|int',
             'return_date'     => 'required',
         ]);
 
@@ -52,18 +50,18 @@ class LoanController extends Controller
 
         Loan::create($loanDetails);
 
-        return to_route('loans.index')->with('status', 'Book borrowed successfully');
+        return to_route('loans.index')
+            ->with('status', 'Book borrowed successfully');
     }
 
-    public function create(Book $book): View
-    {
+    public function create(Book $book): View {
         return view('loans.create', ['book' => $book]);
     }
 
-    public function terminate(Loan $loan): RedirectResponse
-    {
+    public function terminate(Loan $loan): RedirectResponse {
         $loan->terminate();
 
-        return to_route('loans.index')->with('status', 'Book returned successfully');
+        return to_route('loans.index')
+            ->with('status', 'Book returned successfully');
     }
 }
