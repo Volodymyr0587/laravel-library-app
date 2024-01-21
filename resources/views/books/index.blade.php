@@ -143,6 +143,10 @@
 
         </tbody>
     </table>
+    <div class="m-4">
+        {{ $books->links() }}
+    </div>
 </div>
+
 </body>
 </html>
