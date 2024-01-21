@@ -20,7 +20,7 @@ class LoanController extends Controller {
     public function store(Book $book, Request $request): RedirectResponse {
         $validator = ValidatorFacade::make($request->all(), [
             'number_borrowed' => 'required|int',
-            'return_date'     => 'required',
+            'return_date'     => 'required|date|after:today',
         ]);
 
         $validator->after(function (Validator $validator) use ($book) {
