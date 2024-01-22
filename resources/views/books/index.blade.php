@@ -44,7 +44,16 @@
                 <p>
                     {{ session('status') }}
                 </p>
-            </div>
+        </div>
+    @elseif (session()->has('delete-status'))
+        <div x-data="{show: true}"
+                x-init="setTimeout(() => show = false, 4000)"
+                x-show="show"
+                class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-7/12  text-center mx-auto m-5">
+                <p>
+                    {{ session('delete-status') }}
+                </p>
+        </div>
     @endif
     <table class="mx-auto">
         <thead>

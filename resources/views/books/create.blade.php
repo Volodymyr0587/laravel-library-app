@@ -37,7 +37,7 @@
                             <label class="block">
                                 <span class="text-gray-700">Year</span>
                                 <input type="text" name="year" class="block w-full mt-1 rounded-md"
-                                       placeholder="Release date" value="{{old('year')}}"/>
+                                       placeholder="Release year" value="{{old('year')}}"/>
                             </label>
                             @error('year')
                             <div class="text-sm text-red-600">{{ $message }}</div>
@@ -47,7 +47,7 @@
                             <label class="block">
                                 <span class="text-gray-700">Copies in circulation</span>
                                 <input type="number" name="copies_in_circulation" class="block w-full mt-1 rounded-md"
-                                       placeholder="" value="{{old('author')}}"/>
+                                       placeholder="Number of copies of the book" value="{{old('copies_in_circulation')}}"/>
                             </label>
                             @error('copies_in_circulation')
                             <div class="text-sm text-red-600">{{ $message }}</div>

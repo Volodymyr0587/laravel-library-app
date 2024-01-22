@@ -29,7 +29,8 @@ class Loan extends Model
 
     public function terminate()
     {
-        $this->is_returned = true;
-        $this->save();
+        // $this->is_returned = true;
+        $this->delete();
+        // $this->save();
     }
 }

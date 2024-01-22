@@ -23,7 +23,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'author' => 'required',
-            'year' => 'required',
+            'year' => 'required|integer',
             'copies_in_circulation' => 'required|integer',
         ]);
 
@@ -56,9 +56,18 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
-        $book->delete();
+        // Check if the book can be deleted (no loans)
+        if ($book->canBeDeleted()) {
+            // If there are no related loans, proceed with deletion
+            $book->delete();
 
-        return redirect()->route('books.index')
-        ->with('status', 'Book deleted (all copies) successfully');
+            return redirect()->route('books.index')
+                ->with('status', 'Book deleted (all copies) successfully');
+        } else {
+            // If there are related loans, inform the user
+            return redirect()->route('books.index')
+            ->with('delete-status', 'Cannot delete book with related loans');
+        }
+
     }
 }

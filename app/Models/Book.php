@@ -39,4 +39,14 @@ class Book extends Model
     {
         return $this->copies_in_circulation - $this->activeLoans();
     }
+
+    public function canBeDeleted(): bool
+    {
+        // Check if there are any borrowed books releted to this book
+        if ($this->loans()->count() > 0) {
+            return false;
+        }
+
+        return true; // Can be deleted
+    }
 }
