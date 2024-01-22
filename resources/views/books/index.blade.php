@@ -142,11 +142,24 @@
                 @auth
                     <td
                         class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                    @if($book->canBeBorrowed())
-                        <a href="{{ route('loans.create', ['book' => $book->id]) }}">Borrow book</a>
+                        @if($book->canBeBorrowed())
+                            <a href="{{ route('loans.create', ['book' => $book->id]) }}"
+                                class="text-sky-800 hover:text-sky-400 transition-colors duration-200">{{ __('Borrow book') }}</a>
                         @else
-                        <p class="text-red-600"> No copies available to borrow</p>
+                            <p class="text-red-600"> No copies available to borrow</p>
                         @endif
+
+                            <a href="{{ route('book.edit', ['book' => $book->id]) }}" class="text-green-800 hover:text-green-400 transition-colors duration-200">
+                                Edit
+                            </a>
+                            <form action="{{ route('book.destroy', ['book' => $book->id]) }}" method="POST"
+                                onclick="return confirm('{{ __('Are you sure you want to delete all copies of the book?') }}')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-800 hover:text-red-400 transition-colors duration-200">
+                                    {{ __('Delete') }}
+                                </button>
+                            </form>
                     </td>
                 @endif
             </tr>

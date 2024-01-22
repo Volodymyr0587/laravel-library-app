@@ -9,10 +9,13 @@
         <div class="shadow-sm sm:rounded-lg">
             <div class="mx-auto sm:px-6 lg:px-8">
                 @if (session()->has('status'))
-                    <div
-                        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative w-7/12  text-center mx-auto m-5"
-                        role="alert">
-                        <span class="block sm:inline">{{ session()->get('status') }}</span>
+                    <div x-data="{show: true}"
+                        x-init="setTimeout(() => show = false, 4000)"
+                        x-show="show"
+                        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative w-7/12  text-center mx-auto m-5">
+                        <p>
+                            {{ session('status') }}
+                        </p>
                     </div>
                 @endif
 

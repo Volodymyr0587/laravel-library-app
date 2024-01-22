@@ -32,4 +32,33 @@ class BookController extends Controller
         return redirect()->route('books.index')
             ->with('status', 'The book has been added successfully.');
     }
+
+    public function edit($book)
+    {
+        $book = Book::find($book);
+        return view('books.edit', compact('book'));
+    }
+
+    public function update(Request $request, Book $book)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'author' => 'required',
+            'year' => 'required',
+            'copies_in_circulation' => 'required|integer',
+        ]);
+
+        $book->update($request->all());
+
+        return redirect()->route('books.index')
+            ->with('status', 'The book has been updated successfully.');
+    }
+
+    public function destroy(Book $book)
+    {
+        $book->delete();
+
+        return redirect()->route('books.index')
+        ->with('status', 'Book deleted (all copies) successfully');
+    }
 }
