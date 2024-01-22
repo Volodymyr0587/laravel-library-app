@@ -35,6 +35,13 @@
 
     <h2 class="m-6 text-xl font-semibold text-gray-900 text-center">Laravel Library App</h2>
 
+    @if (session()->has('status'))
+        <div
+            class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative w-7/12  text-center mx-auto m-5"
+            role="alert">
+            <span class="block sm:inline">{{ session()->get('status') }}</span>
+        </div>
+    @endif
     <table class="mx-auto">
         <thead>
         <tr>

@@ -10,6 +10,13 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'author',
+        'year',
+        'copies_in_circulation',
+    ];
+
     public function canBeBorrowed(): bool
     {
         return $this->activeLoans() < $this->copies_in_circulation;

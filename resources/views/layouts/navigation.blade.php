@@ -40,6 +40,11 @@
                         <x-dropdown-link :href="route('loans.index')">
                             {{ __('Loans') }}
                         </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('book.create')">
+                            {{ __('Add Book') }}
+                        </x-dropdown-link>
+
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
