@@ -41,9 +41,11 @@
                             {{ __('Loans') }}
                         </x-dropdown-link>
 
+                        @can('create book')
                         <x-dropdown-link :href="route('book.create')">
                             {{ __('Add Book') }}
                         </x-dropdown-link>
+                        @endcan
 
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}

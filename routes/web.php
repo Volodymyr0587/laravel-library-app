@@ -1,15 +1,21 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BookController::class, 'index']);
 
 Route::get('/dashboard', [BookController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+// Assign admin role to user
+Route::get('/admin', function() {
+    User::find(1)->assignRole('admin');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/books', [BookController::class, 'index'])->name('books.index');

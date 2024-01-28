@@ -158,17 +158,22 @@
                             <p class="text-red-600"> No copies available to borrow</p>
                         @endif
 
-                            <a href="{{ route('book.edit', ['book' => $book->id]) }}" class="text-green-800 hover:text-green-400 transition-colors duration-200">
-                                Edit
-                            </a>
-                            <form action="{{ route('book.destroy', ['book' => $book->id]) }}" method="POST"
-                                onclick="return confirm('{{ __('Are you sure you want to delete all copies of the book?') }}')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-800 hover:text-red-400 transition-colors duration-200">
-                                    {{ __('Delete') }}
-                                </button>
-                            </form>
+                            @can('edit book')
+                                <a href="{{ route('book.edit', ['book' => $book->id]) }}" class="text-green-800 hover:text-green-400 transition-colors duration-200">
+                                    Edit
+                                </a>
+                            @endcan
+
+                            @can('delete book')
+                                <form action="{{ route('book.destroy', ['book' => $book->id]) }}" method="POST"
+                                    onclick="return confirm('{{ __('Are you sure you want to delete all copies of the book?') }}')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-800 hover:text-red-400 transition-colors duration-200">
+                                        {{ __('Delete') }}
+                                    </button>
+                                </form>
+                            @endcan
                     </td>
                 @endif
             </tr>
